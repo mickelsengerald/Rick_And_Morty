@@ -13,7 +13,7 @@ export default function Cards({characters, onClose}) {
             gender={character.gender}
             origin={character.origin}
             image={character.image}
-            onClose={() => onClose(character.id)}
+            onClose={onClose}
          />
       ))}
    </div>
