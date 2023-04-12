@@ -24,7 +24,7 @@ export function Card({id, name, status, species, gender, origin, image, onClose,
         removeFav(id);
       } else if (!isAlreadyFav) {
         setIsFav(true);
-        addFav({ id, name, status, species, gender, origin, image });
+        addFav({ id, name, status, species, gender, origin, image, onClose });
       }
     };
 
