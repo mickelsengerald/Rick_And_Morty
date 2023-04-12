@@ -5,9 +5,11 @@ import {useState, useEffect} from "react"
 const Detail = () => {
     const [character, setCharacter] = useState({})
     const {id} =useParams()
+    const URL_BASE = "https://be-a-rym.up.railway.app/api/character"
+    const API_KEY = "a47b7c3f8b26.7ce61050355f4fea750d"
 
     useEffect(() => {
-        axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+        axios(`${URL_BASE}/${id}?key=${API_KEY}`).then(({ data }) => { // axios (`${URL_BASE}/${id}?key=${API_KEY}`)
            if (data.name) {
               setCharacter(data);
            } else {
@@ -19,7 +21,7 @@ const Detail = () => {
 
     return(
         <div>
-            {character.name && (
+            {character.name && (                                                        
                 <div>
                     <h2>{character.name}</h2>
                     <h3>Status: {character.status}</h3>
@@ -30,6 +32,15 @@ const Detail = () => {
                 </div>
             )}
         </div>
+        /* 
+        <div>
+            <h2>{character?.name}</h2> pregunta si esta y lo muestra
+            <h2>{character?.species}</h2>
+            <h2>{character?.gender}</h2>
+            <h2>{character?.origin?.name}</h2>
+            <img src={character?.image} alt={character?.name}/>
+        </div>
+        */
     )
 }
 
