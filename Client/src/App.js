@@ -33,7 +33,7 @@ function App() {
    }, [access]);
 
    function onSearch(id) {
-      axios(`${URL_BASE}/${id}?key=${API_KEY}`) // axios (``${URL_BASE}/${id}?key=${API_KEY}`)
+      axios(`http://localhost:3001/rickandmorty/character/${id}`) // axios (``${URL_BASE}/${id}?key=${API_KEY}`)
       .then(({ data }) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);

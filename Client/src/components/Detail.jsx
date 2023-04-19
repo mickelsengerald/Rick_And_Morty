@@ -9,7 +9,7 @@ const Detail = () => {
     const API_KEY = "a47b7c3f8b26.7ce61050355f4fea750d"
 
     useEffect(() => {
-        axios(`${URL_BASE}/${id}?key=${API_KEY}`).then(({ data }) => { // axios (`${URL_BASE}/${id}?key=${API_KEY}`)
+        axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => { // axios (`${URL_BASE}/${id}?key=${API_KEY}`)
            if (data.name) {
               setCharacter(data);
            } else {
