@@ -1,16 +1,28 @@
-const http = require("http");
-const getCharById = require("./controllers/getCharById")
+const express = require('express');
+const server = express();
+const router = require('./routes')
+const PORT = 3001;
 
-http.createServer(function (request, response) {
-  response.setHeader("Access-Control-Allow-Origin", "*");
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header(
+      'Access-Control-Allow-Methods',
+      'GET, POST, OPTIONS, PUT, DELETE'
+  );
+  next();
+});
 
-  if (request.url.includes("/rickandmorty/character")){
-    const id = request.url.split("/").at(-1)
-    getCharById(response, id)
-  }
-  else {
-    response.writeHead(404, {"Content-Type":"text/plain"})
-    response.end("Character not found")
-  }
-  
-}).listen(3001, "localhost");
+// Middleware para parsear el cuerpo de las solicitudes JSON
+server.use(express.json());
+
+// Middleware para agregar el prefijo "/rickandmorty" antes de cada ruta
+server.use('/rickandmorty', router);
+
+server.listen(PORT, () => {
+   console.log('Server raised in port: ' + PORT);
+});
